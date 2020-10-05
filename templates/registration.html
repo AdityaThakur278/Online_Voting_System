@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Registration</title>
+    <style>
+        body
+        {
+            background: url('https://i.ibb.co/qBHCCQj/back.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        h1{
+            text-align: center;
+            padding: 10px;
+            color: #000;
+        }
+        h1:hover{
+            background-color: black;
+            color: white;
+        }
+        input[type=text], input[type=password], input[type=date],select ,input[type=email]
+        {
+          width: 80%; 
+          padding: 10px;
+          margin: 5px 5px 15px 0px;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+        input[type=text]:focus, input[type=password]:focus, input[type=date]:focus,select:focus {
+          background-color: #ddd;
+         
+        }
+        .register{
+        background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.7));
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        font-size: 18px;
+        padding: 20px;
+        border-radius: 10px;
+        }
+        .f1
+        {
+            font-size: 25px;
+            color: azure;
+        }
+        .f2
+        {
+            font-size: 20px;
+            color: azure;
+        }
+        .gap
+        {
+            margin: 20px 20px 50px 10px;
+            padding: 5px 25px 10px 25px;
+        }
+        .gap1
+        {
+            margin: 20px 50px 50px 10px;
+            padding: 5px 25px 10px 25px;
+        }
+        
+    </style>
+</head>
+<body>
+    <br><br>
+    <h1>Voter Registration</h1>
+    <br>
+    <div class="register">
+        <h3>Select Constituency_ID from the below List :- </h3>
+        <br>
+        <table class="table bordered-tb table-dark" >
+            <thead>
+                <tr>
+                    <th>Constituency_ID</th>
+                    <th>Constituency_Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in f4 %}
+                    <tr>
+                        <td>{{ item.CID }}</td>
+                        <td>{{ item.CName }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
+        
+        <h3>Enter the details here :-</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            <input type="text" id="name" name="name" required onkeypress="return (event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 32" >
+
+            <label for="constituency_id">Constituency_ID : </label>
+            <input type="text" id="constituency_id" name="constituency_id" required onkeypress="return (event.charCode >=48 &&
+            event.charCode <= 57)">
+
+            <label for="ph_no">Phone_NO :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+            <input type="text" id="ph_no" name="ph_no" required onkeypress="return (event.charCode >=48 &&
+            event.charCode <= 57)">
+            <br>
+            <label for="address">Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="address" id="address" required>
+            <br>
+            <label for="dob">Date of Birth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="date" name="dob" id="dob" required>
+            <br><br>
+            <button type="submit" class="btn btn-danger btn-lg">Submit</button>
+        </form>
+        <br><br>
+        <h2> {{ msg }} </h2><br>
+        <table class="table bordered-tb table-dark">
+            <thead>
+                <tr>
+                    <th>Voter_ID : </th>
+                    <th>Constituency_ID : </th>
+                    <th>Phone_NO : </th>
+                    <th>Address : </th>
+                    <th>DOB : </th>
+                </tr>
+                <tbody>
+                    {% for item in data %}
+                        <tr>
+                            <td>{{ item.voter_id }}</td>
+                            <td>{{ item.constituency_ID }}</td>
+                            <td>{{ item.ph_no }}</td>
+                            <td>{{ item.add }}</td>
+                            <td>{{ item.dob }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+        <br><br><br><br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        body
+        {
+            background: url('https://i.ibb.co/qBHCCQj/back.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        h1{
+            text-align: center;
+            padding: 10px;
+            color: #000;
+        }
+        h1:hover{
+            background-color: black;
+            color: white;
+        }
+        input[type=text], input[type=password], input[type=date],select ,input[type=email]
+        {
+          width: 80%; 
+          padding: 10px;
+          margin: 5px 5px 15px 0px;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+        input[type=text]:focus, input[type=password]:focus, input[type=date]:focus,select:focus {
+          background-color: #ddd;
+         
+        }
+        .register{
+        background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.7));
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        font-size: 18px;
+        padding: 20px;
+        border-radius: 10px;
+        }
+        .f1
+        {
+            font-size: 25px;
+            color: azure;
+        }
+        .f2
+        {
+            font-size: 20px;
+            color: azure;
+        }
+        .gap
+        {
+            margin: 20px 20px 50px 10px;
+            padding: 5px 25px 10px 25px;
+        }
+        .gap1
+        {
+            margin: 20px 50px 50px 10px;
+            padding: 5px 25px 10px 25px;
+        }
+        
+    </style>
+</head>
+<body>
+    <br><br>
+    <h1>Voting Page</h1>
+    <br>
+    <div class="register">
+    <h3>Select Member_ID from the below List :- </h3>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Member_ID</th>
+                    <th>Symbol_Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.MID }}</td>
+                        <td>{{ item.Sname }}</td>
+                    </tr>
+                {% endfor %}
+                <!-- <td>{{ cid }}</td>   -->
+            </tbody>
+        </table>
+        <br><br>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="member_ID">Member_ID :&nbsp;&nbsp; </label>
+            <input type="text" id="member_ID" name="member_ID" required onkeypress="return (event.charCode >=48 &&
+            event.charCode <= 57)">
+            
+            <br><br>
+            <button type="submit" class="btn btn-danger btn-lg">Submit</button>
+        </form>
+
+        <br><br>
+        <h2> {{ msg }} </h2><br>
+        
+        <table class="table bordered-tb table-dark">
+            <thead>
+                <tr>
+                    <th>Voter_ID : </th>
+                    <th>Constituency_ID : </th>
+                    <th>Member_ID : </th>
+                    <th>Date : </th>
+                    <th>Time Stamp : </th>
+                </tr>
+                <tbody>
+                    {% for item in ndata %}
+                        <tr>
+                            <td>{{ item.Voter_ID }}</td>
+                            <td>{{ item.constituency_ID }}</td>
+                            <td>{{ item.member_id }}</td>
+                            <td>{{ item.Date }}</td>
+                            <td>{{ item.Time_Stamp }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
