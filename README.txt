@@ -1,5 +1,4 @@
 Created by - Aditya Thakur
-Roll No - 18BCE242
 
 This text file contains some basis information about assignment :-
 
